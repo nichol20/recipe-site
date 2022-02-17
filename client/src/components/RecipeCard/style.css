@@ -1,0 +1,111 @@
+.recipe-card {
+    width: 330px;
+    height: 390px;
+    position: relative;
+    background: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.3);
+    transition: .4s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.recipe-card.empty {
+    background: rgba(226, 226, 226, 0.178);
+}
+
+.recipe-card.empty::before {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../images/icons/add.svg) no-repeat center;
+    background-size: 110px;
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(167deg) brightness(123%) contrast(114%);
+    
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px);
+}
+
+.recipe-card .img-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-height: 270px;
+    overflow: hidden;
+}
+
+.recipe-card .img-box img {
+    height: 100%;
+}
+
+.recipe-card .info-box {
+    padding: 20px;
+    display: flex;
+    height: 120px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipe-card .info-box p {
+    color: var(--dark-text);
+    font-size: 1em;
+    align-self: center;
+    
+}
+
+.recipe-card .info-box .feedback {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feedback .views {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 20px;
+    gap: 5px;
+}
+
+.feedback .views img {
+    max-width: 20px;
+}
+
+.feedback .views span {
+    display: flex;
+    width: 30px;
+    font-weight: 500;
+    font-size: .8em;
+    justify-content: flex-start;
+}
+
+.feedback .rating-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.feedback .rating-box span {
+    display: flex;
+    width: 30px;
+    line-height: 15px;
+    font-weight: 500;
+    font-size: .875em;
+    justify-content: flex-start;
+}
+
+@media(max-width: 375px) {
+    .recipe-card {
+        width: 270px;
+    }
+}

@@ -1,0 +1,323 @@
+.recipe-page {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--background);
+}
+
+.container {
+    margin-top: 105px;
+    display: flex;
+    flex-direction: column;
+}
+
+ul {
+    list-style: none;
+}
+
+.header-container {
+    display: flex;
+    gap: 80px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.container .header-container .recipe-image-box {
+    width:  300px;
+    max-height: 220px;
+}
+
+.header-container .recipe-image-box img {
+    width: 100%;
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
+}
+
+.container .header-container .title-box {
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container .header-container .title-box h1 {
+    font-size: 2em;
+    color: var(--dark-background);
+}
+
+.container .header-container .title-box p {
+    font-size: 1em;
+    color: var(--light-text);
+}
+
+.rating-box-recipe-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container article {
+    max-width: 1000px;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 200px 1fr;
+    grid-template-areas:
+        "ingredients recipe-info"
+        "ingredients cook-note";
+    grid-gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.container article .ingredients-box {
+    grid-area: ingredients;
+    padding: 20px 40px;
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
+    background: lightblue;
+}
+
+.container article .recipe-info-box {
+    grid-area: recipe-info;
+    padding: 20px;
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
+    background: lightcoral;
+}
+
+.container article .cook-note {
+    grid-area: cook-note;
+    padding: 20px;
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
+    background: lightgreen;
+}
+
+article .ingredients-box h2 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+article .ingredients-box .ingredients-recipe-page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+article .ingredients-box .ingredients-recipe-page li {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+article .ingredients-box .ingredients-recipe-page li span {
+    font-size: 1em;   
+}
+
+article .recipe-info-box .recipe-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+
+article .recipe-info-box .recipe-info li span {
+    font-size: 1em;
+}
+
+article .cook-note h2 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+article .cook-note p {
+    font-size: 1em;
+}
+
+.container .directions-box {
+    padding: 20px;
+    background: #e9e9e9;
+    width: 100%;
+    max-width: 960px;
+    align-self: center;
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
+}
+
+.container .directions-box .directions-recipe-page {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.container .directions-box .directions-recipe-page li .step-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.container .directions-box .directions-recipe-page li .step-box h3 {
+    font-size: 1.2em;
+}
+
+.container .directions-box .directions-recipe-page li p {
+    font-size: 1em;
+}
+
+.delete-button-box {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-button-box button {
+    padding: 10px 20px;
+    background: rgb(255, 77, 77);
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
+}
+
+.delete-button-box button:hover {
+    background: rgb(255, 15, 15);
+}
+
+.confirm-delete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(211, 211, 211, 0.418);
+    z-index: 100;
+}
+
+.confirm-delete .confirm-delete-box {
+    background: white;
+    height: 300px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+}
+
+.confirm-delete .confirm-delete-box span {
+    margin-bottom: 30px;
+}
+
+.confirm-delete .confirm-delete-box .confirm-delete-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.confirm-delete .confirm-delete-box .confirm-delete-buttons .yes {
+    background: rgb(95, 95, 255);
+}
+
+.confirm-delete .confirm-delete-box .confirm-delete-buttons .yes:hover {
+    background: rgb(25, 25, 255);
+}
+
+@media(max-width: 921px) {
+    .container {
+        margin-top: 85px;
+    }
+}
+
+@media(max-width: 740px) {
+    .header-container {
+        gap: 15px;
+    }
+}
+
+@media(max-width: 685px) {
+    .container {
+        margin-top: 77px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-container h1{
+        text-align: center;
+    }
+
+    .container article {
+        grid-template-areas:
+            "recipe-info"
+            "ingredients"
+            "cook-note";
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        max-width: 400px;
+    }
+}
+
+@media(max-width: 372px) {
+    .container .header-container .recipe-image-box {
+        width: 180px;
+        max-height: 180px;
+    }
+
+    .container .header-container .title-box {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .container .header-container .title-box h1 {
+        font-size: 1.5em;
+    }
+    
+    .container .header-container .title-box p {
+        font-size: .875em;   
+        padding: 0 10px;
+    }
+
+    .container article {
+        padding: 0px;
+    }
+
+    .container article .ingredients-box {
+        padding: 10px;
+    }
+    article .ingredients-box h2 {
+        font-size: 1.2em;
+        margin-bottom: 12px;
+    }
+
+    article .ingredients-box .ingredients-recipe-page li span {
+        font-size: .875em;   
+    }
+
+    article .recipe-info-box .recipe-info li span {
+        font-size: .875em;
+    }
+
+    article .cook-note h2 {
+        font-size: 1.2em;
+        margin-bottom: 12px;
+    }
+    
+    article .cook-note p {
+        font-size: .875em;
+    }
+
+    .container .directions-box .directions-recipe-page li .step-box h3 {
+        font-size: 1em;
+    }
+    
+    .container .directions-box .directions-recipe-page li p {
+        font-size: .875em;
+    }
+}

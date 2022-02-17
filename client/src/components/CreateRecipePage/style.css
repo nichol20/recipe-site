@@ -1,0 +1,264 @@
+.create-recipe-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.create-recipe-form {
+    max-width: 1000px;
+    width: 100%;
+    margin-top: 120px;
+    padding: 10px 0;
+}
+
+.basic-informations {
+    display: flex;
+    width: 100%;
+    gap: 40px;
+    align-items: center;
+}
+
+.basic-informations .form-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 640px;
+    padding: 10px 20px;
+}
+
+.basic-informations .form-box > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.basic-informations .form-box div input {
+    padding: 5px 10px;
+    font-size: 1em;
+    outline: none;
+    border: 1px solid #333;
+}
+
+.basic-informations .form-box div textarea {
+    padding: 10px;
+    font-size: 1em;
+    outline: none;
+    border: 1px solid #333;
+    resize: none;
+    min-height: 100px;
+}
+
+.basic-informations .form-box .row30 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.basic-informations .form-box .row30 .input-box-row30 .input50 {
+    display: flex;
+    gap: 3px;
+    width: 50%;
+    align-items: flex-end;
+}
+
+.basic-informations .form-box .row30 .input-box-row30  input {
+    width: 70px;
+}
+
+.ingredients-create-page,
+.directions-create-page {
+    display : flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 20px;
+}
+
+.ingredients-create-page .add-box .add-button, 
+.directions-create-page .add-box .add-button {
+    background: rgb(58, 211, 58);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 300px;
+    height: 40px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px 1px rgb(0 0 0 / 30%);
+}
+
+.ingredients-create-page .add-box .add-button:hover,
+.directions-create-page .add-box .add-button:hover {
+    background: rgb(17, 255, 17);
+}
+
+.ingredients-create-page .add-box .add-button img,
+.directions-create-page .add-box .add-button img {
+    filter: invert(94%) sepia(100%) saturate(1%) hue-rotate(256deg) brightness(107%) contrast(100%);
+    height: 20px;
+    width: 20px;
+}
+
+.ingredients-create-page .ingredients-input-list,
+.directions-create-page .directions-textarea-list {
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.ingredients-create-page .ingredients-input-list li,
+.directions-create-page .directions-textarea-list li {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.directions-create-page .directions-textarea-list li {
+    width: 100%;
+}
+
+.ingredients-create-page .ingredients-input-list li input {
+    padding: 5px 10px;
+    font-size: 1em;
+    outline: none;
+    border: 1px solid #333;
+    height: 35px;
+}
+
+.directions-create-page .directions-textarea-list li textarea {
+    padding: 10px;
+    font-size: 1em;
+    outline: none;
+    border: 1px solid #333;
+    resize: none;
+    min-height: 150px;
+    width: 100%;
+}
+
+.ingredients-create-page .ingredients-input-list li .remove-button,
+.directions-create-page .directions-textarea-list li .remove-button {
+    background: rgb(250, 60, 60);
+    min-width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 10px 1px rgb(0 0 0 / 30%);
+}
+
+.ingredients-create-page .ingredients-input-list li .remove-button:hover,
+.directions .directions-textarea-list li .remove-button:hover {
+    background: red;
+}
+
+.ingredients-create-page .ingredients-input-list li .remove-button img,
+.directions-create-page .directions-textarea-list li .remove-button img {
+    min-width: 20px;
+    height: 20px;
+    filter: invert(94%) sepia(100%) saturate(1%) hue-rotate(256deg) brightness(107%) contrast(100%);
+}
+
+.submit-button-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.submit-button-box button[type="submit"] {
+    border: none;
+    background: var(--background);
+    padding: 5px 10px;
+    border-radius: 4px;
+    width: 80px;
+    height: 35px;
+    color: var(--light-text);
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 10px 1px rgb(0 0 0 / 30%);
+}
+
+.submit-button-box button[type="submit"]:hover {
+    transform: translateY(-3px);
+}
+
+@media(max-width: 768px) {
+    .create-recipe-page {
+        padding: 0 20px;
+    }
+
+    .basic-informations {
+        flex-direction: column-reverse;
+    }
+}
+
+@media(max-width: 375px) { 
+    .create-recipe-page {
+        padding: 0 10px;
+    }
+
+    .create-recipe-form {
+        margin-top: 100px;
+    }
+
+    .basic-informations .form-box .row30 {
+        flex-direction: column;
+    }
+
+    .ingredients-create-page .add-box .add-button, 
+    .directions-create-page .add-box .add-button {
+        width: 270px;
+    }
+}
+
+@media(max-width: 320px) {
+    .create-recipe-form {
+        margin-top: 80px;
+        padding: 0 5px;
+        width: 100%;
+    }
+
+    .create-recipe-form label {
+        text-align: center;
+    }
+
+    .basic-informations .form-box {
+        padding: 10px 5px;
+    }
+
+    .ingredients-create-page .add-box, 
+    .directions-create-page .add-box  {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .ingredients-create-page .add-box .add-button, 
+    .directions-create-page .add-box .add-button {
+        width: 200px;
+    }
+
+    
+    .ingredients-create-page .ingredients-input-list li .remove-button,
+    .directions-create-page .directions-textarea-list li .remove-button {
+        min-width: 20px;
+        height: 20px;
+    }
+
+    .ingredients-create-page .ingredients-input-list li .remove-button img,
+    .directions-create-page .directions-textarea-list li .remove-button img {
+        min-width: 14px;
+        height: 14px;
+    }
+}

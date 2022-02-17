@@ -1,0 +1,108 @@
+.home-page {
+    position: relative;
+    padding: 100px;
+    min-height: 100vh;
+    background: var(--dark-background);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+main {
+    z-index: 10;
+}
+
+main .textBox {
+    max-width: 550px;
+}
+
+main .textBox h1 {
+    font-weight: 500;
+    font-size: 4em;
+    margin-bottom: 10px;
+    line-height: 1em;
+    color: var(--background);
+}
+
+main .textBox p {
+    font-size: 1.2em;
+    color: var(--light-text);
+}
+
+main .textBox a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 40px;
+    background: var(--light-background);
+    color: var(--light-text);
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+main .textBox a:hover {
+    color: #fff;
+}
+
+.chocolate_cupcake {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 600px;
+    clip-path: circle(70% at 80% 90%);
+}
+
+@media(max-width: 1100px) {
+    .home-page {
+        padding: 100px 50px;
+    }
+
+    .chocolate_cupcake {
+        max-width: 500px;
+    }
+}
+
+@media(max-width: 921px) {
+    .chocolate_cupcake {
+        max-width: 400px;
+    }
+
+    main .textBox h1 {
+        font-size: 2.5em;
+    }
+
+    main .textBox p {
+        font-size: 1em;
+    }
+
+    main .textBox a {
+        padding: 6px 15px;
+    }
+
+}
+
+@media (max-width: 821px) {
+    .chocolate_cupcake {
+        max-width: 300px;
+    }
+}
+
+@media(max-width: 600px) {
+    .home-page {
+        padding: 70px 30px;
+    }
+
+    main .textBox h1 {
+        font-size: 2.3em;
+    }
+
+    main .textBox a {
+        padding: 3px 10px;
+        letter-spacing: 0px;
+    }
+
+    .chocolate_cupcake {
+        opacity: 0.5;
+    }
+}

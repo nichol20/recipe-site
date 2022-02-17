@@ -1,0 +1,114 @@
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 100px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    background: var(--dark-background);
+    min-width: 220px;
+}
+
+header .logo {
+    max-width: 80px;
+    user-select: none;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.navigation li{
+    list-style: none  
+}
+
+.navigation li a {
+    text-decoration: none;
+    margin-left: 40px;
+    font-weight: 400;
+    display: inline-block;
+    color: var(--light-text);
+}
+
+.navigation li a:hover {
+    color: #fff;
+}
+
+@media(max-width: 1100px) {
+    header {
+        padding: 10px 50px;
+    }
+}
+
+@media(max-width: 921px) {
+    header .logo {
+        max-width: 60px;
+    }
+
+    header .navigation {
+        display: none;
+    }
+
+    header .navigation.active {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--dark-background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    header .navigation li {
+        margin: 10px 0;
+    }
+
+    header .navigation li a {
+        margin-left: 0;
+        font-size: 1.5em;
+    }
+
+    .options-button {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        width: 40px;
+        height: 40px;
+        background: var(--light-background) url(../../images/menu.png);
+        background-size: 30px;
+        background-repeat: no-repeat;
+        background-position: center; 
+        cursor: pointer;
+        border-radius: 2px;
+        z-index: 100;
+    }
+
+    .options-button.active {
+        background: var(--light-background) url(../../images/close.png);
+        background-size: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    header .logo {
+        max-width: 50px;
+    }
+
+    header .navigation li a {
+        font-size: 1.2em;
+    }
+}
