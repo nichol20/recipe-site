@@ -32,6 +32,7 @@ export const Menu = () => {
                     views={recipe.views}
                     recipeName={recipe.title}
                     rating={recipe.rating}
+                    reviews={recipe.reviews}
                   />
                 </a>
               )})

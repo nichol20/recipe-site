@@ -31,7 +31,7 @@ export const RecipeCard = (props) => {
                 <div className="rating">
                   <RatingSystem rating={props.rating} nameId={props.nameId} disable />
                 </div>
-                <span>{props.views}</span>
+                <span>{props.reviews}</span>
               </div>
             </div>
           </div>

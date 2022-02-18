@@ -17,6 +17,10 @@ export const RecipePage = () => {
         api.get(`recipes/${recipeId}`).then(response => setRecipe(response.data))
     },[recipeId])
 
+    useEffect(() => {
+        api.put(`recipes/${recipeId}/update-views`)
+    }, [recipeId])
+
     async function deleteRecipe() {
         await api.delete(`recipes/${recipeId}`)
 
@@ -30,25 +34,33 @@ export const RecipePage = () => {
     return (
         <div className="recipe-page">
             <Header />
-            <div className="container">
-                <div className="header-container">
+            <div className="container-recipe-page">
+                <div className="header-container-recipe-page">
 
-                    <div className="recipe-image-box">
-                        <img src={recipe.image} alt="" />
+                    <div className="recipe-banner-box-recipe-page">
+                        <div className="recipe-image-box">
+                            <img src={recipe.image} alt="" />
+                        </div>
+
+                        <div className="title-box">
+                            <h1>{recipe.title}</h1>
+                            <p>{recipe.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div className="functionalitys-recipe-page">
+                        <div className="rating-box-recipe-page">
+                            <RatingSystem nameId={recipeId}/>
+                        </div>
+
+                        <div className="modify-box-button">
+                            <button className="modify-button">Modify</button>
+                        </div>
                     </div>
 
-                    <div className="title-box">
-                        <h1>{recipe.title}</h1>
-                        <p>{recipe.description}</p>
-                    </div>
-                </div>
-
-                <div className="rating-box-recipe-page">
-
-                    <RatingSystem nameId={recipeId}/>
                 </div>
                 <article>
-                    <div className="ingredients-box">
+                    <div className="ingredients-box-recipe-page">
                         <h2>Ingredients</h2>
                         <ul className="ingredients-recipe-page">
                             {
@@ -88,7 +100,7 @@ export const RecipePage = () => {
 
                 </article>
                 
-                <div className="directions-box">
+                <div className="directions-box-recipe-page">
                     <ul className="directions-recipe-page">
                         {
                             recipe.information[0].directions.map((direction, i) => {
