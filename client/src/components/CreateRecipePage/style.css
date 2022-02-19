@@ -193,6 +193,28 @@
     transform: translateY(-3px);
 }
 
+.create-recipe-form .modify-box-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create-recipe-form .modify-box-button .modify-button {
+    background: rgb(58, 211, 58);
+    color: white;
+    font-size: .875em;
+    width: 150px;
+    height: 30px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px 1px rgb(0 0 0 / 30%);
+}
+.create-recipe-form .modify-box-button .modify-button:hover {
+    background: rgb(17, 255, 17);
+}
+
 @media(max-width: 768px) {
     .create-recipe-page {
         padding: 0 20px;

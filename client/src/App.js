@@ -7,6 +7,7 @@ import { Menu } from './components/Menu/Menu'
 import { About } from './components/About/About'
 import { RecipePage } from './components/RecipePage/RecipePage'
 import { CreateRecipePage } from './components/CreateRecipePage/CreateRecipePage'
+import { ModifyRecipePage } from './components/ModifyRecipePage/ModifyRecipePage'
 
 import './global.css'
 
@@ -19,6 +20,7 @@ export const App = () => {
             <Route path='/about' element={<About />} />
             <Route path='/recipe/:recipeId' element={<RecipePage />} />
             <Route path='/menu/create-recipe' element={<CreateRecipePage />} />
+            <Route path='/recipe/:recipeId/modify-recipe' element={<ModifyRecipePage />} />
         </Routes>
     )
 }

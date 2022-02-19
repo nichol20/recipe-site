@@ -1,4 +1,4 @@
-import { application, Router } from "express";
+import { Router } from "express";
 
 import { CreateRecipeController } from './src/controllers/CreateRecipeController.js'
 import { GetAllRecipesController } from './src/controllers/GetAllRecipesController.js'

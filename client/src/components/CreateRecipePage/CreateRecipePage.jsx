@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { api } from '../../services/api'
 
 import { RecipeCard } from '../RecipeCard/RecipeCard'
@@ -8,7 +8,8 @@ import { Header } from '../Header/Header'
 import './style.css'
 import { addIcon, removeIcon } from '../../images'
 
-export const CreateRecipePage = () => {
+export const CreateRecipePage = (props) => {
+  const { recipeId } = useParams()
   const [ recipeName, setRecipeName] = useState('')
   const [ imageLink, setImageLink ] = useState('')
   const [ description, setDescription ] = useState('')
@@ -34,15 +35,17 @@ export const CreateRecipePage = () => {
     },
 
     removeInputFields(i) {
-      const inputList = document.querySelector('.ingredients-input-list')
       let newIngredientsValues = [...ingredients]
       newIngredientsValues.splice(i, 1)
     
       setIngredients(newIngredientsValues)
-  
-      //handling input update
-      for(let i = 0; i < newIngredientsValues.length; i++) {
-        inputList.children[i].firstChild.value = newIngredientsValues[i].description
+      IngredientsController.handleInputUpdate(newIngredientsValues)
+    },
+
+    handleInputUpdate(arrayUpdated) {
+      const inputList = document.querySelector('.ingredients-input-list')
+      for(let i = 0; i < arrayUpdated.length; i++) {
+        inputList.children[i].firstChild.value = arrayUpdated[i].description
       }
     }
   
@@ -60,19 +63,76 @@ export const CreateRecipePage = () => {
     },
 
     removeTextareaFields(i) {
-      const textareaList = document.querySelector('.directions-textarea-list')
       let newDirectionsValues = [...directions]
       newDirectionsValues.splice(i, 1)
     
       setDirections(newDirectionsValues)
-  
-      //handling input update
-      for(let i = 0; i < newDirectionsValues.length; i++) {
-        textareaList.children[i].firstChild.value = newDirectionsValues[i].description
+      DirectionsController.handleInputUpdate(newDirectionsValues)
+    },
+
+    handleInputUpdate(arrayUpdated) {
+      const textareaList = document.querySelector('.directions-textarea-list')
+
+      for(let i = 0; i < arrayUpdated.length; i++) {
+        textareaList.children[i].firstChild.value = arrayUpdated[i].description
       }
     }
   }
- 
+
+  const { 
+    props_title, 
+    recipe_description,
+    props_ingredients, 
+    props_directions,
+    prep_time,
+    cook_time, 
+    cook_note, 
+    amount_yield,
+    props_image,
+    modify
+  } = props
+
+  useEffect(() => {
+    if(modify) {
+      const cook = cook_time.split(' ')
+      const prep = prep_time.split(' ')
+
+      props_ingredients.forEach(ingredient => {
+        delete ingredient.id
+        delete ingredient.information_id
+      })
+
+      props_directions.forEach(direction => {
+        delete direction.id
+        delete direction.information_id
+      })
+
+      setRecipeName(props_title)
+      setImageLink(props_image)
+      setDescription(recipe_description)
+      setCookTime(cook[0])
+      setCookTimeUnit(cook[1])
+      setPrepTime(prep[0])
+      setPrepTimeUnit(prep[1])
+      setCookNote(cook_note)
+      setAmountYield(amount_yield)
+      setIngredients(props_ingredients)
+      setDirections(props_directions)
+
+    }
+  }, [
+    props_title, 
+    recipe_description,
+    props_ingredients, 
+    props_directions,
+    prep_time,
+    cook_time, 
+    cook_note, 
+    amount_yield,
+    props_image,
+    modify
+  ])
+
   async function createRecipe(event) {
     event.preventDefault()
 
@@ -82,8 +142,25 @@ export const CreateRecipePage = () => {
       recipe_description: description,
       ingredients: ingredients,
       directions: directions,
-      cook_time: cookTime + cookTimeUnit,
-      prep_time: prepTime + prepTimeUnit,
+      cook_time: `${cookTime} ${cookTimeUnit}`,
+      prep_time: `${prepTime} ${prepTimeUnit}`,
+      cook_note: cookNote,
+      amount_yield: amountYield
+    })
+
+    navigate('/menu')
+  }
+
+  async function modifyRecipe() {
+    await api.put(`recipes/${recipeId}/modify-recipe`, 
+    {
+      title: recipeName,
+      image: imageLink,
+      recipe_description: description,
+      ingredients: ingredients,
+      directions: directions,
+      cook_time: `${cookTime} ${cookTimeUnit}`,
+      prep_time: `${prepTime} ${prepTimeUnit}`,
       cook_note: cookNote,
       amount_yield: amountYield
     })
@@ -106,6 +183,7 @@ export const CreateRecipePage = () => {
                  placeholder="carrot cake"
                  name='name'
                  id="name"
+                 defaultValue={recipeName}
                  required
                  onChange={e => setRecipeName(e.target.value)}
                 />
@@ -119,6 +197,7 @@ export const CreateRecipePage = () => {
                  name="image"
                  id="image"
                  required
+                 defaultValue={imageLink}
                  onChange={e => setImageLink(e.target.value)}
                 />
               </div>
@@ -131,6 +210,7 @@ export const CreateRecipePage = () => {
                  name="description"
                  id="description"
                  required
+                 defaultValue={description}
                  onChange={e => setDescription(e.target.value)}
                 />
               </div>
@@ -146,11 +226,13 @@ export const CreateRecipePage = () => {
                      min="0"
                      max="60"
                      required
+                     defaultValue={prepTime}
                      onChange={e => setPrepTime(e.target.value)}
                     />
                     <select
                      name="prep-time-unit" 
                      onChange={e => setPrepTimeUnit(e.target.value)}
+                     defaultValue={prepTimeUnit}
                     >
                       <option value="min">min</option>
                       <option value="h">h</option>
@@ -168,11 +250,13 @@ export const CreateRecipePage = () => {
                      min="0"
                      max="60"
                      required
+                     defaultValue={cookTime}
                      onChange={e => setCookTime(e.target.value)}
                     />
                     <select
                      name="cook-time-unit" 
                      onChange={e => setCookTimeUnit(e.target.value)}
+                     defaultValue={cookTimeUnit}
                     >
                       <option value="min">min</option>
                       <option value="h">h</option>
@@ -189,6 +273,7 @@ export const CreateRecipePage = () => {
                      id='yield'
                      min='0'
                      required
+                     defaultValue={amountYield}
                      onChange={e => setAmountYield(Number(e.target.value))}
                     />
                   </div>
@@ -204,6 +289,7 @@ export const CreateRecipePage = () => {
                  name='cook-note'
                  id="cook-note"
                  required
+                 defaultValue={cookNote}
                  onChange={e => setCookNote(e.target.value)}
                 />
               </div>
@@ -235,13 +321,14 @@ export const CreateRecipePage = () => {
 
           <ol className='ingredients-input-list'>
             {
-              ingredients.map((_,i) => {
+              ingredients.map((ingredient,i) => {
                 return(
                   <li key={i}>
                     <input
                      type="text"
                      name={`ingredient-${i}`}
                      required
+                     defaultValue={ingredient.description}
                      onChange={ e => IngredientsController.handleChangeInputFields(e, i) } 
                     />
                     <button
@@ -272,13 +359,14 @@ export const CreateRecipePage = () => {
 
           <ol className='directions-textarea-list'>
             {
-              directions.map((_,i) => {
+              directions.map((direction,i) => {
                 return(
                   <li key={i}>
                     <textarea
                      type="text" 
                      name={`direction-${i}`} 
                      required
+                     defaultValue={direction.description}
                      onChange={ e => DirectionsController.handleChangeTextareaFields(e, i) } 
                     />
                     <button
@@ -295,9 +383,24 @@ export const CreateRecipePage = () => {
           </ol>
         </div>
 
-        <div className="submit-button-box">
-          <button type='submit'>Submit</button>
-        </div>
+        {
+          modify ? (
+            <div className="modify-box-button">
+              <button
+               className="modify-button"
+               type='button'
+               onClick={modifyRecipe}
+              >
+                  Modify
+              </button>
+            </div>
+          ) : (
+            <div className="submit-button-box">
+              <button type='submit'>Submit</button>
+            </div>
+          )
+        }
+        
       </form>
     </div>
   )

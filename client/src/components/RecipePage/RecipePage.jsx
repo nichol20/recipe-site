@@ -54,7 +54,12 @@ export const RecipePage = () => {
                         </div>
 
                         <div className="modify-box-button">
-                            <button className="modify-button">Modify</button>
+                            <button
+                             className="modify-button"
+                             onClick={() => navigate(`/recipe/${recipeId}/modify-recipe`)}
+                            >
+                                Modify
+                            </button>
                         </div>
                     </div>
 
