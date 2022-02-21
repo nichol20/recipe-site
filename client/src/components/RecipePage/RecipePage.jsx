@@ -69,7 +69,7 @@ export const RecipePage = () => {
                         <h2>Ingredients</h2>
                         <ul className="ingredients-recipe-page">
                             {
-                             recipe.information[0].ingredients.map((ingredient, i) => {
+                             recipe.information?.ingredients?.map((ingredient, i) => {
                                 return(
                                     <li key={i}>
                                         <input type="checkbox"/> 
@@ -84,23 +84,23 @@ export const RecipePage = () => {
                     <div className="recipe-info-box">
                         <ul className="recipe-info">
                             <li>
-                                <span><strong>Prep:</strong> {recipe.information[0].prep_time}</span>
+                                <span><strong>Prep:</strong> {recipe.information?.prep_time}</span>
                             </li>
                             <li>
-                                <span><strong>Cook:</strong> {recipe.information[0].cook_time}</span>
+                                <span><strong>Cook:</strong> {recipe.information?.cook_time}</span>
                             </li>
                             <li>
                                 <span><strong>Total:</strong> 1h</span>
                             </li>
                             <li>
-                                <span><strong>Yield:</strong> {recipe.information[0].amount_yield} servings</span>
+                                <span><strong>Yield:</strong> {recipe.information?.amount_yield} servings</span>
                             </li>
                         </ul>
                     </div>
 
                     <div className="cook-note">
                         <h2>Cook's notes</h2>
-                        <p>{recipe.information[0].cook_note}</p>
+                        <p>{recipe.information?.cook_note}</p>
                     </div>
 
                 </article>
@@ -108,7 +108,7 @@ export const RecipePage = () => {
                 <div className="directions-box-recipe-page">
                     <ul className="directions-recipe-page">
                         {
-                            recipe.information[0].directions.map((direction, i) => {
+                            recipe.information?.directions?.map((direction, i) => {
                                 return(
                                     <li key={i}>
                                         <div className="step-box">

@@ -5,7 +5,7 @@ class UpdateViewsController {
         const { recipeId } = req.params
 
         const service = new UpdateViewsService
-        const result = service.execute(recipeId)
+        const result = await service.execute(recipeId)
 
         return res.json(result)
     }

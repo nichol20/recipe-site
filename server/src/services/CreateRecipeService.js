@@ -1,7 +1,7 @@
 import prismaClient from "../prisma/index.js";
 
 class CreateRecipeService {
-    async execute(data) {
+    async execute(data, user_id) {
         const { 
             title, 
             recipe_description,
@@ -11,16 +11,14 @@ class CreateRecipeService {
             cook_time, 
             cook_note, 
             amount_yield,
-            rating, 
-            image, 
-            views, 
-            reviews 
+            image
         } = data
 
         const createRecipe = await prismaClient.recipe.create({
             data: {
                 title,
                 description: recipe_description,
+                image,
                 information: {
                     create : {
                         ingredients: { create: ingredients },
@@ -31,10 +29,7 @@ class CreateRecipeService {
                         amount_yield
                     }
                 },
-                rating,
-                image,
-                views,
-                reviews,
+                user_id
             }
         })
 

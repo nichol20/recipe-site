@@ -7,16 +7,30 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model User {
+  id          String @id @default(uuid())
+  name        String
+  github_id   Int
+  avatar_url  String
+  login       String
+  recipes     Recipe[]
+
+  @@map("users")
+}
+
 model Recipe {
   id          String @id @default(uuid())
   title       String
   description String
-  information Information[]
+  information Information?
   rating      Float @default(0)
   image       String
   views       Int @default(0)
   reviews     Int @default(0)
   created_at  DateTime @default(now())
+
+  user        User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String
 
   @@map("recipes")
 }
@@ -30,8 +44,8 @@ model Information {
   amount_yield  Int
   cook_note     String
 
-  recipe      Recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
-  recipe_id   String
+  recipe        Recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  recipe_id     String
 
   @@map("informations")
 }

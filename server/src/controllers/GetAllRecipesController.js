@@ -2,7 +2,7 @@ import { GetAllRecipesService } from '../services/GetAllRecipesService.js'
 
 class GetAllRecipesController {
     async handle(req, res) {
-        const service = new GetAllRecipesService
+        const service = new GetAllRecipesService()
 
         const result = await service.execute()
 

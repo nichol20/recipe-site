@@ -6,7 +6,7 @@ class UpdateRatingController {
         const data = req.body
 
         const service = new UpdateRatingService
-        const result = service.execute(recipeId, data.rating)
+        const result = await service.execute(recipeId, data.rating)
 
         return res.json(result)
     }
