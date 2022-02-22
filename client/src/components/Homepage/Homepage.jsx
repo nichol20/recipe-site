@@ -6,7 +6,7 @@ import { chocolateCupcakeImg } from '../../images';
 
 import './style.css'
 
-export const Homepage = () => {
+export const HomePage = () => {
 
     return(
       <div className='home-page'>

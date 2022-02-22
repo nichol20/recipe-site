@@ -20,6 +20,7 @@ export const Header = () => {
                 <li><a href="/menu">Menu</a></li>
                 <li><a href="/contact">Contact</a></li>
                 <li><a href="/about">About us</a></li>
+                <li><a href="/login">Sign in</a></li>
             </ul>
         </header>
     )

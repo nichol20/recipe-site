@@ -6,9 +6,9 @@ import prismaClient from "../prisma/index.js"
 
 class AuthenticateUserService {
     async execute(code) {
-        const urlGithubAccessToken = `https://github.com/login/oauth/access_token`
+        const githubAccessTokenUrl = `https://github.com/login/oauth/access_token`
 
-        const { data: tokenData } = await axios.post(urlGithubAccessToken, null, {
+        const { data: tokenData } = await axios.post(githubAccessTokenUrl, null, {
             params: {
                 client_id: process.env.GITHUB_CLIENT_ID,
                 client_secret: process.env.GITHUB_CLIENT_SECRET,

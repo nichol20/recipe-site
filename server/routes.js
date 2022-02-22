@@ -12,20 +12,24 @@ import { ensureAuthenticated } from "./src/middleware/ensureAuthenticated.js";
 
 const router = Router()
 
+/*-----------GET--------------*/
 router.get('/recipes', new GetAllRecipesController().handle)
 
 router.get('/recipes/:recipeId', new GetRecipeController().handle)
 
+/*-----------POST--------------*/
 router.post('/recipes', ensureAuthenticated, new CreateRecipeController().handle)
 
-router.put('/recipes/:recipeId/update-rating', new UpdateRatingController().handle)
+router.post("/authenticate", new AuthenticateUserController().handle)
+
+/*-----------PUT--------------*/
+router.put('/recipes/:recipeId/update-rating', ensureAuthenticated, new UpdateRatingController().handle)
 
 router.put('/recipes/:recipeId/update-views', new UpdateViewsController().handle)
 
-router.put('/recipes/:recipeId/modify-recipe', new ModifyRecipeController().handle)
+router.put('/recipes/:recipeId/modify-recipe', ensureAuthenticated, new ModifyRecipeController().handle)
 
-router.delete('/recipes/:recipeId', new DeleteRecipeController().handle)
-
-router.post("/authenticate", new AuthenticateUserController().handle)
+/*-----------DEL--------------*/
+router.delete('/recipes/:recipeId', ensureAuthenticated, new DeleteRecipeController().handle)
 
 export { router }

@@ -4,9 +4,7 @@ export function ensureAuthenticated(req, res, next) {
     const authToken = req.headers.authorization
 
     if(!authToken) {
-        return res.status(401).json({
-            errorCode: "token.invalid"
-        })
+        return res.status(401).json({ errorCode: "token.invalid" })
     }
 
     const [, token] = authToken.split(" ")

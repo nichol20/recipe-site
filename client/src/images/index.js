@@ -23,3 +23,7 @@ export { default as starIcon } from './icons/star.svg'
 //Create recipe page
 export { default as addIcon } from './icons/add.svg'
 export { default as removeIcon } from './icons/remove.svg'
+
+//Login page
+export { default as githubIcon } from './icons/logo-github.svg'
+export { default as googleIcon } from './icons/logo-google.svg'
