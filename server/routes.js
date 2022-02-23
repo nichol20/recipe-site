@@ -9,6 +9,7 @@ import { UpdateViewsController } from './src/controllers/UpdateViewsController.j
 import { ModifyRecipeController } from "./src/controllers/ModifyRecipeController.js";
 import { AuthenticateUserController } from "./src/controllers/AuthenticateUserController.js";
 import { ensureAuthenticated } from "./src/middleware/ensureAuthenticated.js";
+import { GetProfileUserController } from './src/controllers/GetProfileUserController.js'
 
 const router = Router()
 
@@ -17,7 +18,7 @@ router.get('/recipes', new GetAllRecipesController().handle)
 
 router.get('/recipes/:recipeId', new GetRecipeController().handle)
 
-router.get('/profile', ensureAuthenticated, new GetRecipeController().handle)
+router.get('/profile', ensureAuthenticated, new GetProfileUserController().handle)
 
 /*-----------POST--------------*/
 router.post('/recipes', ensureAuthenticated, new CreateRecipeController().handle)

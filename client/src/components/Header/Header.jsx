@@ -1,11 +1,16 @@
-import React,{ useState } from 'react';
+import React,{ useContext, useState } from 'react';
+
+import { AuthContext } from '../../contexts/auth'
 
 import './style.css'
 
 import { logoImg } from '../../images';
 
 export const Header = () => {
+    const { logOutFromGithub, user } = useContext(AuthContext)
     const [ classActive, setClassActive ] = useState('')
+
+    console.log(user)
     
     function toggleMenu() {
         return classActive === '' ? setClassActive('active') : setClassActive('')
@@ -20,7 +25,15 @@ export const Header = () => {
                 <li><a href="/menu">Menu</a></li>
                 <li><a href="/contact">Contact</a></li>
                 <li><a href="/about">About us</a></li>
-                <li><a href="/login">Sign in</a></li>
+                <li>
+                    {
+                        !!user ? 
+                        (<a href="/" onClick={logOutFromGithub}>Log out</a>)
+                         :
+                        (<a href="/login">Sign in</a>)
+                    }
+                    
+                </li>
             </ul>
         </header>
     )

@@ -1,9 +1,9 @@
 import prismaClient from "../prisma/index.js";
 
 class GetRecipeService {
-    async execute(id) {
+    async execute(recipeId) {
         const recipe = await prismaClient.recipe.findUnique({
-            where: { id: id },
+            where: { id: recipeId },
             include: {
                 information: {
                     include: {

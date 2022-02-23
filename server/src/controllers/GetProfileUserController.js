@@ -1,4 +1,4 @@
-import { GetProfileUserService } from "../services/GetProfileUserService"
+import { GetProfileUserService } from "../services/GetProfileUserService.js"
 
 class GetProfileUserController {
     async handle(req, res) {
