@@ -14,7 +14,11 @@ export const AuthProvider = (props) => {
         window.location.assign(gitOauthUrl)
     }
 
-    
+    function logOutFromGithub() {
+        setUser(null)
+        localStorage.removeItem('@recipesite:token')
+    }
+
     async function fecthTokenAndUserDataFromGithub(githubCode) {
         const response = await api.post('authenticate', { code: githubCode })
         const { token, user: userData } = await response.data
@@ -23,6 +27,20 @@ export const AuthProvider = (props) => {
 
         setUser(userData)
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem('@recipesite:token')
+
+        async function fetchUser(){
+            if(token) {
+                api.defaults.headers.common.authorization = `Bearer ${token}`
+
+                const response = await api.get('profile')
+                setUser(response.data)
+            }
+        }
+        fetchUser()
+    }, [])
 
     useEffect(() => {
         const url = window.location.href
@@ -38,7 +56,7 @@ export const AuthProvider = (props) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ signInWithGithub, user }}>
+        <AuthContext.Provider value={{ signInWithGithub, logOutFromGithub, user }}>
             {props.children}
         </AuthContext.Provider>
     )

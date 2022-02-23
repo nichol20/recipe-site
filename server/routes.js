@@ -17,6 +17,8 @@ router.get('/recipes', new GetAllRecipesController().handle)
 
 router.get('/recipes/:recipeId', new GetRecipeController().handle)
 
+router.get('/profile', ensureAuthenticated, new GetRecipeController().handle)
+
 /*-----------POST--------------*/
 router.post('/recipes', ensureAuthenticated, new CreateRecipeController().handle)
 

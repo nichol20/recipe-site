@@ -16,6 +16,6 @@ export function ensureAuthenticated(req, res, next) {
 
         return next()
     } catch (err) {
-        return res.status(401).json({ errorCode: "token.expired" })
+        return res.status(401).json({ errorCode: "invalid or expired token" })
     }
 }
