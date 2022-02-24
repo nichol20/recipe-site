@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { api } from '../../services/api'
 
 import { RecipeCard } from '../RecipeCard/RecipeCard'
 import { Header } from '../Header/Header'
+import { LoginPage } from '../index'
 
 import './style.css'
 import { addIcon, removeIcon } from '../../images'
+import { AuthContext } from '../../contexts/Auth'
 
 export const CreateRecipePage = (props) => {
+  const { user } = useContext(AuthContext)
   const { recipeId } = useParams()
+  const navigate = useNavigate()
   const [ recipeName, setRecipeName] = useState('')
   const [ imageLink, setImageLink ] = useState('')
   const [ description, setDescription ] = useState('')
@@ -21,7 +25,53 @@ export const CreateRecipePage = (props) => {
   const [ amountYield, setAmountYield ]= useState()
   const [ ingredients, setIngredients ] = useState([])
   const [ directions, setDirections ] = useState([])
-  const navigate = useNavigate()
+  const { 
+    props_title, 
+    recipe_description,
+    props_ingredients, 
+    props_directions,
+    prep_time,
+    cook_time, 
+    cook_note, 
+    amount_yield,
+    props_image,
+    modify
+  } = props
+
+  async function createRecipe(event) {
+    event.preventDefault()
+
+    await api.post('recipes', {
+      title: recipeName,
+      image: imageLink,
+      recipe_description: description,
+      ingredients: ingredients,
+      directions: directions,
+      cook_time: `${cookTime} ${cookTimeUnit}`,
+      prep_time: `${prepTime} ${prepTimeUnit}`,
+      cook_note: cookNote,
+      amount_yield: amountYield
+    })
+
+    navigate('/menu')
+  }
+
+  async function modifyRecipe() {
+    await api.put(`recipes/${recipeId}/modify-recipe`, 
+    {
+      title: recipeName,
+      image: imageLink,
+      recipe_description: description,
+      ingredients: ingredients,
+      directions: directions,
+      cook_time: `${cookTime} ${cookTimeUnit}`,
+      prep_time: `${prepTime} ${prepTimeUnit}`,
+      cook_note: cookNote,
+      amount_yield: amountYield
+    })
+
+    navigate('/menu')
+  }
 
   const IngredientsController = {
     handleChangeInputFields(e, index) {
@@ -79,19 +129,6 @@ export const CreateRecipePage = (props) => {
     }
   }
 
-  const { 
-    props_title, 
-    recipe_description,
-    props_ingredients, 
-    props_directions,
-    prep_time,
-    cook_time, 
-    cook_note, 
-    amount_yield,
-    props_image,
-    modify
-  } = props
-
   useEffect(() => {
     if(modify) {
       const cook = cook_time.split(' ')
@@ -133,39 +170,8 @@ export const CreateRecipePage = (props) => {
     modify
   ])
 
-  async function createRecipe(event) {
-    event.preventDefault()
-
-    await api.post('recipes', {
-      title: recipeName,
-      image: imageLink,
-      recipe_description: description,
-      ingredients: ingredients,
-      directions: directions,
-      cook_time: `${cookTime} ${cookTimeUnit}`,
-      prep_time: `${prepTime} ${prepTimeUnit}`,
-      cook_note: cookNote,
-      amount_yield: amountYield
-    })
-
-    navigate('/menu')
-  }
-
-  async function modifyRecipe() {
-    await api.put(`recipes/${recipeId}/modify-recipe`, 
-    {
-      title: recipeName,
-      image: imageLink,
-      recipe_description: description,
-      ingredients: ingredients,
-      directions: directions,
-      cook_time: `${cookTime} ${cookTimeUnit}`,
-      prep_time: `${prepTime} ${prepTimeUnit}`,
-      cook_note: cookNote,
-      amount_yield: amountYield
-    })
-
-    navigate('/menu')
+  if(!user) {
+    return <LoginPage />
   }
 
   return (

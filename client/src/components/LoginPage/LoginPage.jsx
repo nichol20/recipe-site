@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { AuthContext } from '../../contexts/auth'
+import { AuthContext } from '../../contexts/Auth'
 
 import { logoImg } from '../../images'
 import { githubIcon, googleIcon } from '../../images'

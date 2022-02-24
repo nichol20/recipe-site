@@ -7,7 +7,7 @@ class CreateRecipeController {
 
         const service = new CreateRecipeService
         const result = await service.execute(data, user_id)
-
+        
         return res.json(result)
     }
 }

@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { api } from '../services/api';
 
-export const AuthContext = createContext(null)
+export const AuthContext = createContext({})
 
 export const AuthProvider = (props) => {
     const [ user, setUser ] = useState(null)
@@ -14,7 +14,7 @@ export const AuthProvider = (props) => {
         window.location.assign(gitOauthUrl)
     }
 
-    function logOutFromGithub() {
+    function signOutFromGithub() {
         setUser(null)
         localStorage.removeItem('@recipesite:token')
     }
@@ -23,6 +23,7 @@ export const AuthProvider = (props) => {
         const response = await api.post('authenticate', { code: githubCode })
         const { token, user: userData } = await response.data
 
+        console.log(response)
         localStorage.setItem('@recipesite:token', token)
 
         setUser(userData)
@@ -36,7 +37,7 @@ export const AuthProvider = (props) => {
                 api.defaults.headers.common.authorization = `Bearer ${token}`
 
                 const response = await api.get('profile')
-                setUser(response.data)
+                await setUser(response.data)
             }
         }
         fetchUser()
@@ -56,7 +57,7 @@ export const AuthProvider = (props) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ signInWithGithub, logOutFromGithub, user }}>
+        <AuthContext.Provider value={{ signInWithGithub, signOutFromGithub, user }}>
             {props.children}
         </AuthContext.Provider>
     )

@@ -5,7 +5,7 @@ class GetAllRecipesController {
         const service = new GetAllRecipesService()
 
         const result = await service.execute()
-
+        
         return res.json(result)
     }
 }

@@ -19,11 +19,13 @@ class AuthenticateUserService {
             }
         })
 
-        const { login, id, avatar_url, name } = await axios.get('https://api.github.com/user', {
+        const fetchGitUser = await axios.get('https://api.github.com/user', {
             headers: {
                 authorization: `Bearer ${tokenData.access_token}`
             }
         })
+
+        const { login, id, avatar_url, name: githubName } = await fetchGitUser.data
 
         let user = await prismaClient.user.findFirst({
             where: {
@@ -31,13 +33,14 @@ class AuthenticateUserService {
             }
         })
 
+
         if(!user) {
             user = await prismaClient.user.create({
                 data: {
                     github_id: id,
                     login,
                     avatar_url,
-                    name
+                    name: githubName ? githubName : 'undefined'
                 }
             })
         }

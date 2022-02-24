@@ -7,7 +7,7 @@ class UpdateRatingController {
 
         const service = new UpdateRatingService
         const result = await service.execute(recipeId, data.rating)
-
+        
         return res.json(result)
     }
 }

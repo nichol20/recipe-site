@@ -1,31 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { api } from '../../services/api';
 
+import { AuthContext } from '../../contexts/Auth';
+import { api } from '../../services/api';
 import { Header } from '../Header/Header';
 import { RatingSystem } from '../RatingSystem/RatingSystem';
 
 import './style.css'
 
 export const RecipePage = () => {
+    const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     const { recipeId } = useParams()
     const [ recipe, setRecipe ] = useState()
     const [ confirmDelete, setConfirmDelete ] = useState(false)
+    const [ createdByThisUser, setCreatedByThisUser ] = useState(false)
+
+    const deleteRecipe = async () =>  {
+        await api.delete(`recipes/${recipeId}`)
+
+        navigate('/menu')
+    }
 
     useEffect(() => {
         api.get(`recipes/${recipeId}`).then(response => setRecipe(response.data))
     },[recipeId])
 
     useEffect(() => {
-        api.put(`recipes/${recipeId}/update-views`)
-    }, [recipeId])
-
-    async function deleteRecipe() {
-        await api.delete(`recipes/${recipeId}`)
-
-        navigate('/menu')
-    }
+        if(user && recipe) {
+            api.put(`recipes/${recipeId}/update-views`)
+            console.log(recipe)
+            recipe.user_id === user.id ? 
+                setCreatedByThisUser(true) : setCreatedByThisUser(false)
+        }
+    }, [recipeId, user, createdByThisUser, recipe])
 
     if(!recipe) {
         return 'Loading ...'
@@ -47,22 +55,28 @@ export const RecipePage = () => {
                             <p>{recipe.description}</p>
                         </div>
                     </div>
-                    
-                    <div className="functionalitys-recipe-page">
-                        <div className="rating-box-recipe-page">
-                            <RatingSystem nameId={recipeId}/>
-                        </div>
+                    {
+                        user ? (
+                            <div className="functionalitys-recipe-page">
+                                <div className="rating-box-recipe-page">
+                                    <RatingSystem nameId={recipeId}/>
+                                </div>
 
-                        <div className="modify-box-button">
-                            <button
-                             className="modify-button"
-                             onClick={() => navigate(`/recipe/${recipeId}/modify-recipe`)}
-                            >
-                                Modify
-                            </button>
-                        </div>
-                    </div>
-
+                                { 
+                                    createdByThisUser ? (
+                                        <div className="modify-box-button">
+                                            <button
+                                            className="modify-button"
+                                            onClick={() => navigate(`/recipe/${recipeId}/modify-recipe`)}
+                                            >
+                                                Modify
+                                            </button>
+                                        </div>
+                                    ) : (<></>)
+                                }
+                            </div>
+                        ) : (<></>)
+                    }
                 </div>
                 <article>
                     <div className="ingredients-box-recipe-page">
@@ -122,24 +136,28 @@ export const RecipePage = () => {
                     </ul>
                 </div>
             </div>
-            <div className="delete-button-box">
-                <button onClick={() => setConfirmDelete(true)}>Delete</button>
-                {
-                    confirmDelete ?
-                    (
-                        <div className='confirm-delete'>
-                            <div className="confirm-delete-box">
-                                <h3>Are you sure about that?</h3>
-                                <span>You won't be able to revert this</span>
-                                <div className="confirm-delete-buttons">
-                                    <button className="yes" onClick={deleteRecipe}>Yes, delete it</button>
-                                    <button className="cancel" onClick={() => setConfirmDelete(false)}>Cancel</button>
+            {
+                createdByThisUser ? (
+                    <div className="delete-button-box">
+                        <button onClick={() => setConfirmDelete(true)}>Delete</button>
+                        {
+                            confirmDelete ? (
+                                <div className='confirm-delete'>
+                                    <div className="confirm-delete-box">
+                                        <h3>Are you sure about that?</h3>
+                                        <span>You won't be able to revert this</span>
+                                        <div className="confirm-delete-buttons">
+                                            <button className="yes" onClick={deleteRecipe}>Yes, delete it</button>
+                                            <button className="cancel" onClick={() => setConfirmDelete(false)}>Cancel</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    ) : (<></>)
-                }
-            </div>
+                            ) : (<></>)
+                        }
+                    </div>
+                ) : (<></>)
+            }
+            
         </div>
     )
 }

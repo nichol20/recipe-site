@@ -6,7 +6,7 @@ class GetProfileUserController {
         
         const service = new GetProfileUserService
         const result = await service.execute(user_id)
-
+        
         return res.json(result)
     }
 }

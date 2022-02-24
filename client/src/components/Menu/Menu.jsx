@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { api } from '../../services/api';
 
 import { RecipeCard } from '../RecipeCard/RecipeCard'
 import { Header } from '../Header/Header';
 
 import './style.css'
+import { AuthContext } from '../../contexts/Auth';
 
 export const Menu = () => {
+  const { user } = useContext(AuthContext)
   const [ recipes, setRecipes ] = useState()
 
   useEffect(() => {
@@ -37,9 +39,14 @@ export const Menu = () => {
                 </a>
               )})
           }
-          <a href="/menu/create-recipe">
-            <RecipeCard empty />
-          </a>
+          {
+            !!user ? (
+              <a href="/menu/create-recipe">
+                <RecipeCard empty />
+              </a>
+            ) : (<></>)
+          }
+          
         </div>
       </div>
   )
