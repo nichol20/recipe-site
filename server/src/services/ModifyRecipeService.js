@@ -35,15 +35,12 @@ class ModifyRecipeService {
                 image: image,
                 information: {
                     update: {
-                        where: { id: information.id },
-                        data: {
-                            ingredients: { create: ingredients },
-                            directions: { create: directions },
-                            prep_time: prep_time,
-                            cook_time: cook_time,
-                            cook_note: cook_note,
-                            amount_yield: amount_yield
-                        }
+                        ingredients: { create: ingredients },
+                        directions: { create: directions },
+                        prep_time: prep_time,
+                        cook_time: cook_time,
+                        cook_note: cook_note,
+                        amount_yield: amount_yield
                     }
                 }   
             }
