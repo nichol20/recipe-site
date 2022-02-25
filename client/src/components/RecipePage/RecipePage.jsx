@@ -27,13 +27,19 @@ export const RecipePage = () => {
     },[recipeId])
 
     useEffect(() => {
+        if(user && recipe ) {
+            if(!recipe.views?.find(view => view.user_id === user.id)){
+                api.put(`recipes/${recipeId}/update-views`, { user_id: user.id })
+            }
+        }
+    }, [recipe, user, recipeId])
+
+    useEffect(() => {
         if(user && recipe) {
-            api.put(`recipes/${recipeId}/update-views`)
-            console.log(recipe)
             recipe.user_id === user.id ? 
                 setCreatedByThisUser(true) : setCreatedByThisUser(false)
         }
-    }, [recipeId, user, createdByThisUser, recipe])
+    }, [user, createdByThisUser, recipe])
 
     if(!recipe) {
         return 'Loading ...'
@@ -66,8 +72,8 @@ export const RecipePage = () => {
                                     createdByThisUser ? (
                                         <div className="modify-box-button">
                                             <button
-                                            className="modify-button"
-                                            onClick={() => navigate(`/recipe/${recipeId}/modify-recipe`)}
+                                             className="modify-button"
+                                             onClick={() => navigate(`/recipe/${recipeId}/modify-recipe`)}
                                             >
                                                 Modify
                                             </button>

@@ -38,7 +38,7 @@ export const CreateRecipePage = (props) => {
     modify
   } = props
 
-  async function createRecipe(event) {
+  const createRecipe = async event => {
     event.preventDefault()
 
     await api.post('recipes', {
@@ -306,9 +306,9 @@ export const CreateRecipePage = (props) => {
             <RecipeCard 
               image={imageLink}
               recipeName={recipeName}
+              views={Array(1000)}
+              reviews={Array(1000)}
               rating={5}
-              views={1000}
-              reviews={1000}
             />
           </div>
         </div>

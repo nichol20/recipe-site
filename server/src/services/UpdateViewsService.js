@@ -1,15 +1,11 @@
 import prismaClient from "../prisma/index.js";
 
 class UpdateViewsService {
-    async execute(recipeId) {
-        const current = await prismaClient.recipe.findFirst({
-            where: { id: recipeId },
-            select: { views: true }
-        })
+    async execute(recipeId, userId ) {
 
         const updateViews = await prismaClient.recipe.update({
             where: { id: recipeId },
-            data: { views: current.views + 1 }
+            data: { views: { create: { user_id: userId } } }
         })
 
         return updateViews

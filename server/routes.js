@@ -28,7 +28,7 @@ router.post("/authenticate", new AuthenticateUserController().handle)
 /*-----------PUT--------------*/
 router.put('/recipes/:recipeId/update-rating', ensureAuthenticated, new UpdateRatingController().handle)
 
-router.put('/recipes/:recipeId/update-views', new UpdateViewsController().handle)
+router.put('/recipes/:recipeId/update-views', ensureAuthenticated, new UpdateViewsController().handle)
 
 router.put('/recipes/:recipeId/modify-recipe', ensureAuthenticated, new ModifyRecipeController().handle)
 

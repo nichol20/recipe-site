@@ -25,14 +25,35 @@ model Recipe {
   information Information?
   rating      Float @default(0)
   image       String
-  views       Int @default(0)
-  reviews     Int @default(0)
+  views       View[]
+  reviews     Review[]
   created_at  DateTime @default(now())
 
   user        User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     String
 
   @@map("recipes")
+}
+
+model View {
+  id          Int @id @default(autoincrement())
+  user_id     String
+
+  recipe      Recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  recipe_id   String
+
+  @@map("views")
+}
+
+model Review {
+  id          Int @id @default(autoincrement())
+  rating      Float
+  user_id     String
+
+  recipe      Recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  recipe_id   String
+
+  @@map("reviews")
 }
 
 model Information {

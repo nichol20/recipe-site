@@ -9,7 +9,9 @@ class GetAllRecipesService {
                         ingredients: true,
                         directions: true
                     }
-                }
+                },
+                views: true,
+                reviews: true
             }
         })
 

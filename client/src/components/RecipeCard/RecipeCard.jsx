@@ -7,6 +7,14 @@ import { eyeIcon } from '../../images';
 import './style.css'
 
 export const RecipeCard = (props) => {
+  const { 
+    nameId,
+    image,
+    views,
+    rating,
+    recipeName,
+    reviews,
+  } = props
 
   return (
     <div className={`recipe-card ${props.empty ? 'empty': ''}`}>
@@ -15,23 +23,23 @@ export const RecipeCard = (props) => {
         props.empty ? (<></>) : (
         <>
           <div className="img-box">
-            <img src={props.image} alt="" />
+            <img src={image} alt="" />
           </div>
 
           <div className="info-box">
-            <p>{props.recipeName}</p>
+            <p>{recipeName}</p>
             <div className="feedback">
               
               <div className="views">
                 <img src={eyeIcon} alt="eye icon" />
-                <span>{props.views}</span>
+                <span>{views ? views.length : 0}</span>
               </div>
 
               <div className="rating-box">  
                 <div className="rating">
-                  <RatingSystem rating={props.rating} nameId={props.nameId} disable />
+                  <RatingSystem rating={rating} nameId={nameId} disable />
                 </div>
-                <span>{props.reviews}</span>
+                <span>{reviews ? reviews.length : 0}</span>
               </div>
             </div>
           </div>

@@ -30,10 +30,10 @@ export const Menu = () => {
                 <a href={`/recipe/${recipe.id}`} key={recipe.id} >
                   <RecipeCard 
                     nameId={recipe.id} 
-                    image={recipe.image} 
-                    views={recipe.views}
                     recipeName={recipe.title}
+                    image={recipe.image} 
                     rating={recipe.rating}
+                    views={recipe.views}
                     reviews={recipe.reviews}
                   />
                 </a>
