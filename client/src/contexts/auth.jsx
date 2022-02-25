@@ -6,33 +6,23 @@ export const AuthContext = createContext({})
 
 export const AuthProvider = (props) => {
     const [ user, setUser ] = useState(null)
+    const GitHubController = {
+        signUp: async () => {
+            const response = await api.get('github')
+            const gitOauthUrl = await response.data
+    
+            window.location.assign(gitOauthUrl)
+        },
 
-    async function signInWithGithub() {
-        const response = await api.get('github')
-        const gitOauthUrl = await response.data
-
-        window.location.assign(gitOauthUrl)
-    }
-
-    function signOutFromGithub() {
-        setUser(null)
-        localStorage.removeItem('@recipesite:token')
-    }
-
-    async function fecthTokenAndUserDataFromGithub(githubCode) {
-        const response = await api.post('authenticate', { code: githubCode })
-        const { token, user: userData } = await response.data
-
-        console.log(response)
-        localStorage.setItem('@recipesite:token', token)
-
-        setUser(userData)
+        signOut: () => {
+            setUser(null)
+            localStorage.removeItem('@recipesite:token')
+        }
     }
 
     useEffect(() => {
         const token = localStorage.getItem('@recipesite:token')
-
-        async function fetchUser(){
+        const fetchUser = async () => {
             if(token) {
                 api.defaults.headers.common.authorization = `Bearer ${token}`
 
@@ -40,24 +30,32 @@ export const AuthProvider = (props) => {
                 await setUser(response.data)
             }
         }
+
         fetchUser()
     }, [])
 
     useEffect(() => {
         const url = window.location.href
         const hasGithubCode = url.includes('?code=')
+        
+        const fecthTokenAndUserDataFromGithub = async githubCode => {
+            const response = await api.post('authenticate', { code: githubCode })
+            const { token, user: userData } = await response.data
+
+            localStorage.setItem('@recipesite:token', token)
+    
+            setUser(userData)
+        }
 
         if(hasGithubCode) {
-            const [ homePageUrl, githubCode] = url.split('?code=')
-
+            const [ homePageUrl, githubCode ] = url.split('?code=')
             window.history.pushState({}, '', homePageUrl)
-
             fecthTokenAndUserDataFromGithub(githubCode)
         }
     }, [])
 
     return (
-        <AuthContext.Provider value={{ signInWithGithub, signOutFromGithub, user }}>
+        <AuthContext.Provider value={{ GitHubController, user }}>
             {props.children}
         </AuthContext.Provider>
     )

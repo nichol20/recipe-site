@@ -38,53 +38,55 @@ export const CreateRecipePage = (props) => {
     modify
   } = props
 
-  const createRecipe = async event => {
-    event.preventDefault()
+  const RecipeController = {
+    createRecipe: async event => {
+      event.preventDefault()
+  
+      await api.post('recipes', {
+        title: recipeName,
+        image: imageLink,
+        recipe_description: description,
+        ingredients: ingredients,
+        directions: directions,
+        cook_time: `${cookTime} ${cookTimeUnit}`,
+        prep_time: `${prepTime} ${prepTimeUnit}`,
+        cook_note: cookNote,
+        amount_yield: amountYield
+      })
+  
+      navigate('/menu')
+    },
 
-    await api.post('recipes', {
-      title: recipeName,
-      image: imageLink,
-      recipe_description: description,
-      ingredients: ingredients,
-      directions: directions,
-      cook_time: `${cookTime} ${cookTimeUnit}`,
-      prep_time: `${prepTime} ${prepTimeUnit}`,
-      cook_note: cookNote,
-      amount_yield: amountYield
-    })
-
-    navigate('/menu')
-  }
-
-  async function modifyRecipe() {
-    await api.put(`recipes/${recipeId}/modify-recipe`, 
-    {
-      title: recipeName,
-      image: imageLink,
-      recipe_description: description,
-      ingredients: ingredients,
-      directions: directions,
-      cook_time: `${cookTime} ${cookTimeUnit}`,
-      prep_time: `${prepTime} ${prepTimeUnit}`,
-      cook_note: cookNote,
-      amount_yield: amountYield
-    })
-
-    navigate('/menu')
+    modifyRecipe: async () => {
+      await api.put(`recipes/${recipeId}/modify-recipe`, 
+      {
+        title: recipeName,
+        image: imageLink,
+        recipe_description: description,
+        ingredients: ingredients,
+        directions: directions,
+        cook_time: `${cookTime} ${cookTimeUnit}`,
+        prep_time: `${prepTime} ${prepTimeUnit}`,
+        cook_note: cookNote,
+        amount_yield: amountYield
+      })
+  
+      navigate('/menu')
+    }
   }
 
   const IngredientsController = {
-    handleChangeInputFields(e, index) {
+    handleChangeInputFields: (e, index) => {
       let newIngredientsValues = [...ingredients]
       newIngredientsValues[index].description = e.target.value
       setIngredients(newIngredientsValues)
     },
 
-    addInputFields() {
+    addInputFields: () => {
       setIngredients([...ingredients, { description: '' }])
     },
 
-    removeInputFields(i) {
+    removeInputFields: i => {
       let newIngredientsValues = [...ingredients]
       newIngredientsValues.splice(i, 1)
     
@@ -92,7 +94,7 @@ export const CreateRecipePage = (props) => {
       IngredientsController.handleInputUpdate(newIngredientsValues)
     },
 
-    handleInputUpdate(arrayUpdated) {
+    handleInputUpdate: arrayUpdated => {
       const inputList = document.querySelector('.ingredients-input-list')
       for(let i = 0; i < arrayUpdated.length; i++) {
         inputList.children[i].firstChild.value = arrayUpdated[i].description
@@ -102,17 +104,17 @@ export const CreateRecipePage = (props) => {
   }
 
   const DirectionsController = {
-    handleChangeTextareaFields(e, index) {
+    handleChangeTextareaFields: (e, index) => {
       let newDirectionsValues = [...directions]
       newDirectionsValues[index].description = e.target.value
       setDirections(newDirectionsValues)
     },
 
-    addTextareaFields() {
+    addTextareaFields: () => {
       setDirections([...directions, { description: '' }])
     },
 
-    removeTextareaFields(i) {
+    removeTextareaFields: i => {
       let newDirectionsValues = [...directions]
       newDirectionsValues.splice(i, 1)
     
@@ -120,7 +122,7 @@ export const CreateRecipePage = (props) => {
       DirectionsController.handleInputUpdate(newDirectionsValues)
     },
 
-    handleInputUpdate(arrayUpdated) {
+    handleInputUpdate: arrayUpdated => {
       const textareaList = document.querySelector('.directions-textarea-list')
 
       for(let i = 0; i < arrayUpdated.length; i++) {
@@ -178,7 +180,7 @@ export const CreateRecipePage = (props) => {
     <div className="create-recipe-page">
       <Header />
 
-      <form className="create-recipe-form" onSubmit={createRecipe}>
+      <form className="create-recipe-form" onSubmit={RecipeController.createRecipe}>
         <div className="basic-informations">
           <div className="form-box">
               
@@ -395,7 +397,7 @@ export const CreateRecipePage = (props) => {
               <button
                className="modify-button"
                type='button'
-               onClick={modifyRecipe}
+               onClick={RecipeController.modifyRecipe}
               >
                   Modify
               </button>

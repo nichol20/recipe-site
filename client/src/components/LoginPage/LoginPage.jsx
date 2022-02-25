@@ -8,14 +8,14 @@ import { githubIcon, googleIcon } from '../../images'
 import './style.css'
 
 export const LoginPage = () => {
-    const { signInWithGithub } = useContext(AuthContext)
+    const { GitHubController } = useContext(AuthContext)
     return (
         <div className='login-page'>
             <div className="logo-box">
                 <img src={logoImg} alt="logo" />
             </div>
             <div className="login-box">
-                <div onClick={signInWithGithub} className="github-login-box">
+                <div onClick={GitHubController.singUp} className="github-login-box">
                     <button className="github-login-button">
                         <img src={githubIcon} alt="github icon" />
                         <span>Sign up with GitHub</span>

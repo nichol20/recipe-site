@@ -23,23 +23,30 @@ export const RecipePage = () => {
     }
 
     useEffect(() => {
-        api.get(`recipes/${recipeId}`).then(response => setRecipe(response.data))
-    },[recipeId])
+        const fetchRecipes = async () => {
+            const response = await api.get(`recipes/${recipeId}`)
+            await setRecipe(response.data)
+        }
 
-    useEffect(() => {
-        if(user && recipe ) {
-            if(!recipe.views?.find(view => view.user_id === user.id)){
-                api.put(`recipes/${recipeId}/update-views`, { user_id: user.id })
+        const updateViews = async () => {
+            if(user && recipe ) {
+                if(!recipe.views?.find(view => view.user_id === user.id)){
+                    api.put(`recipes/${recipeId}/update-views`, { user_id: user.id })
+                }
             }
         }
-    }, [recipe, user, recipeId])
 
-    useEffect(() => {
-        if(user && recipe) {
-            recipe.user_id === user.id ? 
-                setCreatedByThisUser(true) : setCreatedByThisUser(false)
+        const checkIfRecipeCreatedByUser = () => {
+            if(user && recipe) {
+                recipe.user_id === user.id ? 
+                    setCreatedByThisUser(true) : setCreatedByThisUser(false)
+            }
         }
-    }, [user, createdByThisUser, recipe])
+
+        fetchRecipes()
+        updateViews()
+        checkIfRecipeCreatedByUser()
+    }, [recipe, user, recipeId])
 
     if(!recipe) {
         return 'Loading ...'
