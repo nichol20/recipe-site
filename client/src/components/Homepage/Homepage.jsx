@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header } from '../Header/Header';
+import { Header } from '..';
 
 import { chocolateCupcakeImg } from '../../images';
 
@@ -9,9 +9,9 @@ import './style.css'
 export const HomePage = () => {
 
     return(
-      <div className='home-page'>
+      <div className="home-page">
         <img src={chocolateCupcakeImg} alt="chocolate cupcake" className="chocolate_cupcake" />
-        <Header/>
+        <Header position="absolute" />
         <main>
             <div className="textBox">
                 <h1>Wonderful recipes</h1>

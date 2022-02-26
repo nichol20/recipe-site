@@ -1,4 +1,15 @@
 header {
+    position: relative;
+    width: 100%;
+    padding: 10px 100px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    background: var(--dark-background);
+    min-width: 220px;
+}
+
+header.absolute {
     position: absolute;
     top: 0;
     left: 0;
@@ -6,7 +17,7 @@ header {
     padding: 10px 100px;
     display: flex;
     justify-content: space-between;
-    z-index: 100;
+    z-index: 1000;
     background: var(--dark-background);
     min-width: 220px;
 }
@@ -40,7 +51,7 @@ header .logo {
 }
 
 @media(max-width: 1100px) {
-    header {
+    header, header.absolute {
         padding: 10px 50px;
     }
 }
@@ -88,7 +99,7 @@ header .logo {
         background-position: center; 
         cursor: pointer;
         border-radius: 2px;
-        z-index: 100;
+        z-index: 1000;
     }
 
     .options-button.active {
@@ -100,7 +111,7 @@ header .logo {
 }
 
 @media(max-width: 600px) {
-    header {
+    header, header.absolute {
         padding: 10px 20px;
     }
 

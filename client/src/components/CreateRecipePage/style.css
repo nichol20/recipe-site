@@ -9,7 +9,6 @@
 .create-recipe-form {
     max-width: 1000px;
     width: 100%;
-    margin-top: 120px;
     padding: 10px 0;
 }
 
@@ -227,11 +226,7 @@
 
 @media(max-width: 375px) { 
     .create-recipe-page {
-        padding: 0 10px;
-    }
-
-    .create-recipe-form {
-        margin-top: 100px;
+        padding: 0;
     }
 
     .basic-informations .form-box .row30 {
@@ -246,8 +241,7 @@
 
 @media(max-width: 320px) {
     .create-recipe-form {
-        margin-top: 80px;
-        padding: 0 5px;
+        padding: 10px 5px;
         width: 100%;
     }
 
@@ -257,6 +251,10 @@
 
     .basic-informations .form-box {
         padding: 10px 5px;
+    }
+
+    .ingredients-create-page, .directions-create-page {
+        padding: 0px;
     }
 
     .ingredients-create-page .add-box, 
@@ -271,6 +269,9 @@
         width: 200px;
     }
 
+    .ingredients-create-page .ingredients-input-list li, .directions-create-page .directions-textarea-list li {
+        flex-direction: column;
+    }
     
     .ingredients-create-page .ingredients-input-list li .remove-button,
     .directions-create-page .directions-textarea-list li .remove-button {

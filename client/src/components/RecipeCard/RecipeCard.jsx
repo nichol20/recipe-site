@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RatingSystem } from '../RatingSystem/RatingSystem';
+import { RatingSystem } from '..';
 
 import { eyeIcon } from '../../images';
 
@@ -18,7 +18,6 @@ export const RecipeCard = (props) => {
 
   return (
     <div className={`recipe-card ${props.empty ? 'empty': ''}`}>
-
       {
         props.empty ? (<></>) : (
         <>

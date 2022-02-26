@@ -5,7 +5,6 @@
 }
 
 .container-recipe-page {
-    margin-top: 105px;
     display: flex;
     flex-direction: column;
 }
@@ -256,12 +255,6 @@ article .cook-note p {
     background: rgb(25, 25, 255);
 }
 
-@media(max-width: 921px) {
-    .container-recipe-page {
-        margin-top: 85px;
-    }
-}
-
 @media(max-width: 740px) {
     .recipe-banner-box-recipe-page {
         gap: 15px;
@@ -269,8 +262,9 @@ article .cook-note p {
 }
 
 @media(max-width: 685px) {
-    .container-recipe-page {
-        margin-top: 77px;
+
+    .header-container-recipe-page .recipe-banner-box-recipe-page {
+        gap: 5px;
     }
 
     .recipe-banner-box-recipe-page {
@@ -340,6 +334,10 @@ article .cook-note p {
     
     article .cook-note p {
         font-size: .875em;
+    }
+
+    .container-recipe-page .directions-box-recipe-page {
+        margin-top: 15px;
     }
 
     .container-recipe-page .directions-box-recipe-page .directions-recipe-page li .step-box h3 {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { api } from '../../services/api';
 
 import { RecipeCard } from '../RecipeCard/RecipeCard'
-import { Header } from '../Header/Header';
+import { Header } from '..';
 
 import './style.css'
 import { AuthContext } from '../../contexts/Auth';
@@ -20,9 +20,9 @@ export const Menu = () => {
   }
   
   return (
+    <>
+      <Header />
       <div className='menu'>
-        <Header />
-
         <div className="card-box">
           {
             recipes.map(recipe => {
@@ -49,6 +49,7 @@ export const Menu = () => {
           
         </div>
       </div>
+    </>
   )
 }
 

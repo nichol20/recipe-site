@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { CreateRecipePage } from '../CreateRecipePage/CreateRecipePage'
+import { CreateRecipePage } from '..'
 import { api } from '../../services/api'
 
 export const ModifyRecipePage = () => {

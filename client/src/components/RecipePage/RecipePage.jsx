@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/Auth';
 import { api } from '../../services/api';
-import { Header } from '../Header/Header';
-import { RatingSystem } from '../RatingSystem/RatingSystem';
+import { Header, RatingSystem } from '..';
 
 import './style.css'
 
