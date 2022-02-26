@@ -23,7 +23,7 @@ export const RecipeCard = (props) => {
         props.empty ? (<></>) : (
         <>
           <div className="img-box">
-            <img src={image} alt="" />
+            <img src={image} alt={recipeName} />
           </div>
 
           <div className="info-box">

@@ -133,8 +133,8 @@ export const CreateRecipePage = (props) => {
 
   useEffect(() => {
     if(modify) {
-      const cook = cook_time.split(' ')
-      const prep = prep_time.split(' ')
+      const [ cookAmountTime, cookUnityTime ] = cook_time.split(" ")
+      const [ prepAmountTime, prepUnityTime ] = prep_time.split(" ")
 
       props_ingredients.forEach(ingredient => {
         delete ingredient.id
@@ -149,10 +149,10 @@ export const CreateRecipePage = (props) => {
       setRecipeName(props_title)
       setImageLink(props_image)
       setDescription(recipe_description)
-      setCookTime(cook[0])
-      setCookTimeUnit(cook[1])
-      setPrepTime(prep[0])
-      setPrepTimeUnit(prep[1])
+      setCookTime(cookAmountTime)
+      setCookTimeUnit(cookUnityTime)
+      setPrepTime(prepAmountTime)
+      setPrepTimeUnit(prepUnityTime)
       setCookNote(cook_note)
       setAmountYield(amount_yield)
       setIngredients(props_ingredients)

@@ -15,6 +15,7 @@ export const RecipePage = () => {
     const [ recipe, setRecipe ] = useState()
     const [ confirmDelete, setConfirmDelete ] = useState(false)
     const [ createdByThisUser, setCreatedByThisUser ] = useState(false)
+    const [ totalTime, setTotalTime ] = useState('')
 
     const deleteRecipe = async () =>  {
         await api.delete(`recipes/${recipeId}`)
@@ -27,11 +28,14 @@ export const RecipePage = () => {
             const response = await api.get(`recipes/${recipeId}`)
             await setRecipe(response.data)
         }
+        fetchRecipes()
+    }, [recipeId])
 
+    useEffect(() => {
         const updateViews = async () => {
-            if(user && recipe ) {
+            if(user && recipe) {
                 if(!recipe.views?.find(view => view.user_id === user.id)){
-                    api.put(`recipes/${recipeId}/update-views`, { user_id: user.id })
+                    await api.put(`recipes/${recipeId}/update-views`, { user_id: user.id })
                 }
             }
         }
@@ -41,12 +45,51 @@ export const RecipePage = () => {
                 recipe.user_id === user.id ? 
                     setCreatedByThisUser(true) : setCreatedByThisUser(false)
             }
+        } 
+
+        const sumTotalTime = () => {
+            if(recipe) {
+                const { prep_time, cook_time } = recipe.information
+                const [ prepAmountTime, prepUnityTime ] = prep_time.split(" ")
+                const [ cookAmountTime, cookUnityTime ] = cook_time.split(" ")
+                let total = 0
+                let hour, minute = 0
+
+                if(prepUnityTime === cookUnityTime) {
+                    total = (Number(prepAmountTime) + Number(cookAmountTime))
+                } else {
+                    if(prepUnityTime === 'h') {
+                        setTotalTime(`${prep_time} ${cook_time}`)
+                    }
+                    if(cookUnityTime === 'h') {
+                        setTotalTime(`${cook_time} ${prep_time}`)
+                    }
+                    return
+                }
+
+                if(total > 59) {
+                    if(prepUnityTime === 'min' && cookUnityTime === 'min') {
+                        hour = Math.floor(total / 60)
+                        minute = total % 60
+
+                        setTotalTime(`${hour} h ${minute} min`)
+                    } 
+                } else {
+                    setTotalTime(`${total} min`)
+                    return
+                }
+
+                if(prepUnityTime === 'h' && cookUnityTime === 'h') {
+                    setTotalTime(`${total} h`)
+                    console.log(`${total} h`)
+                }
+            }
         }
 
-        fetchRecipes()
-        updateViews()
         checkIfRecipeCreatedByUser()
-    }, [recipe, user, recipeId])
+        updateViews()
+        sumTotalTime()
+    }, [recipe, recipeId, user])
 
     if(!recipe) {
         return 'Loading ...'
@@ -117,7 +160,7 @@ export const RecipePage = () => {
                                 <span><strong>Cook:</strong> {recipe.information?.cook_time}</span>
                             </li>
                             <li>
-                                <span><strong>Total:</strong> 1h</span>
+                                <span><strong>Total:</strong> {totalTime}</span>
                             </li>
                             <li>
                                 <span><strong>Yield:</strong> {recipe.information?.amount_yield} servings</span>

@@ -2,7 +2,7 @@ import prismaClient from "../prisma/index.js";
 
 class UpdateRatingService {
     async execute(recipeId, newRatingValue, userId) {
-        const { reviews: ratingArray} = await prismaClient.recipe.findFirst({
+        const { reviews: ratingArray } = await prismaClient.recipe.findFirst({
             where: { id: recipeId },
             select: { reviews: true }
         })
@@ -40,7 +40,7 @@ class UpdateRatingService {
                 }
             })
         } else {
-            const averageRating = Number(( (totalRating + newRatingValue) / (ratingArray.length  + 1)).toFixed(1))
+            const averageRating = Number((( totalRating + newRatingValue ) / ( ratingArray.length  + 1 )).toFixed(1))
 
             updateReviews = await prismaClient.recipe.update({
                 where: { id: recipeId },

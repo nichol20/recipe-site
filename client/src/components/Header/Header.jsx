@@ -16,7 +16,7 @@ export const Header = () => {
 
     return (
         <header>
-            <a href="/"><img src={logoImg} className="logo" alt='' /></a>
+            <a href="/"><img src={logoImg} className="logo" alt='logo' /></a>
             <div className={`options-button ${classActive}`} onClick={toggleMenu}></div>
             <ul className={`navigation ${classActive}`}>
                 <li><a href="/">Home</a></li>
