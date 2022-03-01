@@ -7,9 +7,9 @@ import './style.css'
 import { logoImg } from '../../images';
 
 export const Header = ({ position }) => {
-    const { GitHubController, user } = useContext(AuthContext)
+    const { signOut, user } = useContext(AuthContext)
     const [ classActive, setClassActive ] = useState('')
-    
+
     const toggleMenu = () => {
         return classActive === '' ? setClassActive('active') : setClassActive('')
     }
@@ -61,7 +61,7 @@ export const Header = ({ position }) => {
                 <li>
                     {
                         user ? 
-                        (<a href="/" id="login" onClick={GitHubController.signOut}>Sign out</a>)
+                        (<a href="/" id="login" onClick={signOut}>Sign out</a>)
                          :
                         (<a href="/login" id="login" >Sign in</a>)
                     }

@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { api } from '../services/api';
 
 export const AuthContext = createContext({})
 
 export const AuthProvider = (props) => {
+    const navigate = useNavigate()
     const [ user, setUser ] = useState(null)
     const GitHubController = {
         signUp: async () => {
@@ -12,12 +14,24 @@ export const AuthProvider = (props) => {
             const gitOauthUrl = await response.data
     
             window.location.assign(gitOauthUrl)
-        },
-
-        signOut: () => {
-            setUser(null)
-            localStorage.removeItem('@recipesite:token')
         }
+    }
+
+    const GoogleController = {
+        signUp: async googleData => {
+            const response = await api.post('/authenticate-with-google', { token: googleData.tokenId } )
+            const { token, user: userData } = await response.data
+
+            localStorage.setItem('@recipesite:token', token)
+            
+            setUser(userData)
+            navigate('/')
+        }
+    }
+
+    const signOut = () => {
+        setUser(null)
+        localStorage.removeItem('@recipesite:token')
     }
 
     useEffect(() => {
@@ -26,8 +40,12 @@ export const AuthProvider = (props) => {
             if(token) {
                 api.defaults.headers.common.authorization = `Bearer ${token}`
 
-                const response = await api.get('profile')
-                await setUser(response.data)
+                try {
+                    const response = await api.get('profile')
+                    await setUser(response.data)
+                } catch (err) {
+                    localStorage.removeItem('@recipesite:token')
+                }
             }
         }
 
@@ -38,8 +56,8 @@ export const AuthProvider = (props) => {
         const url = window.location.href
         const hasGithubCode = url.includes('?code=')
         
-        const fecthTokenAndUserDataFromGithub = async githubCode => {
-            const response = await api.post('authenticate', { code: githubCode })
+        const fetchGithubData = async githubCode => {
+            const response = await api.post('authenticate-with-github', { code: githubCode })
             const { token, user: userData } = await response.data
 
             localStorage.setItem('@recipesite:token', token)
@@ -50,12 +68,12 @@ export const AuthProvider = (props) => {
         if(hasGithubCode) {
             const [ homePageUrl, githubCode ] = url.split('?code=')
             window.history.pushState({}, '', homePageUrl)
-            fecthTokenAndUserDataFromGithub(githubCode)
+            fetchGithubData(githubCode)
         }
     }, [])
 
     return (
-        <AuthContext.Provider value={{ GitHubController, user }}>
+        <AuthContext.Provider value={{ GitHubController, GoogleController, signOut, user }}>
             {props.children}
         </AuthContext.Provider>
     )

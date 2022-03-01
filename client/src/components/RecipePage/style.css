@@ -30,6 +30,7 @@ ul {
 .header-container-recipe-page .recipe-banner-box-recipe-page .recipe-image-box {
     width:  300px;
     max-height: 220px;
+    overflow: hidden;
 }
 
 .header-container-recipe-page .recipe-banner-box-recipe-page .recipe-image-box img {
@@ -101,6 +102,7 @@ ul {
     padding: 20px 40px;
     box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
     background: lightblue;
+    min-height: 200px;
 }
 
 .container-recipe-page article .recipe-info-box {
@@ -115,6 +117,7 @@ ul {
     padding: 20px;
     box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.3);
     background: lightgreen;
+    min-height: 200px;
 }
 
 article .ingredients-box-recipe-page h2 {

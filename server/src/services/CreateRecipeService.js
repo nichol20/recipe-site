@@ -21,12 +21,12 @@ class CreateRecipeService {
                 image,
                 information: {
                     create : {
-                        ingredients: { create: ingredients },
-                        directions: { create: directions },
                         cook_time,
                         prep_time,
                         cook_note,
-                        amount_yield
+                        amount_yield,
+                        ingredients: { create: ingredients },
+                        directions: { create: directions }
                     }
                 },
                 user_id

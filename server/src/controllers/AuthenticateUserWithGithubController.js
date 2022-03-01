@@ -1,10 +1,10 @@
-import { AuthenticateUserService } from "../services/AuthenticateUserService.js"
+import { AuthenticateUserWithGithubService } from "../services/AuthenticateUserWithGithubService.js"
 
-class AuthenticateUserController {
+class AuthenticateUserWithGithubController {
     async handle(req, res) {
         const { code } = req.body
 
-        const service = new AuthenticateUserService
+        const service = new AuthenticateUserWithGithubService
 
         try {
             const result = await service.execute(code);
@@ -15,4 +15,4 @@ class AuthenticateUserController {
     }
 }
 
-export { AuthenticateUserController }
+export { AuthenticateUserWithGithubController }

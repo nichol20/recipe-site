@@ -4,7 +4,7 @@ import 'dotenv/config'
 
 import prismaClient from "../prisma/index.js"
 
-class AuthenticateUserService {
+class AuthenticateUserWithGithubService {
     async execute(code) {
         const githubAccessTokenUrl = `https://github.com/login/oauth/access_token`
 
@@ -25,7 +25,7 @@ class AuthenticateUserService {
             }
         })
 
-        const { login, id, avatar_url, name: githubName } = await fetchGitUser.data
+        const { email, id, avatar_url, name } = await fetchGitUser.data
 
         let user = await prismaClient.user.findFirst({
             where: {
@@ -33,14 +33,13 @@ class AuthenticateUserService {
             }
         })
 
-
         if(!user) {
             user = await prismaClient.user.create({
                 data: {
-                    github_id: id,
-                    login,
+                    name: name ?? 'undefined',
                     avatar_url,
-                    name: githubName ? githubName : 'undefined'
+                    email: email ?? 'undefined',
+                    github_id: id,
                 }
             })
         }
@@ -50,6 +49,7 @@ class AuthenticateUserService {
                 user: {
                     name: user.name,
                     avatar_url: user.avatar_url,
+                    email: user.email,
                     id: user.id
                 }
             },
@@ -64,4 +64,4 @@ class AuthenticateUserService {
     }
 }
 
-export { AuthenticateUserService }
+export { AuthenticateUserWithGithubService }

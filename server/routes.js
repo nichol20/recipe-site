@@ -7,9 +7,10 @@ import { DeleteRecipeController } from './src/controllers/DeleteRecipeController
 import { UpdateRatingController } from './src/controllers/UpdateRatingController.js'
 import { UpdateViewsController } from './src/controllers/UpdateViewsController.js'
 import { ModifyRecipeController } from "./src/controllers/ModifyRecipeController.js";
-import { AuthenticateUserController } from "./src/controllers/AuthenticateUserController.js";
+import { AuthenticateUserWithGithubController } from "./src/controllers/AuthenticateUserWithGithubController.js";
 import { ensureAuthenticated } from "./src/middleware/ensureAuthenticated.js";
 import { GetProfileUserController } from './src/controllers/GetProfileUserController.js'
+import { AuthenticateUserWithGoogleController } from "./src/controllers/AuthenticateUserWithGoogleController.js";
 
 const router = Router()
 
@@ -23,7 +24,9 @@ router.get('/profile', ensureAuthenticated, new GetProfileUserController().handl
 /*-----------POST--------------*/
 router.post('/recipes', ensureAuthenticated, new CreateRecipeController().handle)
 
-router.post("/authenticate", new AuthenticateUserController().handle)
+router.post("/authenticate-with-github", new AuthenticateUserWithGithubController().handle)
+
+router.post("/authenticate-with-google", new AuthenticateUserWithGoogleController().handle)
 
 /*-----------PUT--------------*/
 router.put('/recipes/:recipeId/update-rating', ensureAuthenticated, new UpdateRatingController().handle)

@@ -186,39 +186,39 @@ export const CreateRecipePage = (props) => {
                 <div className="row100">
                   <label htmlFor="name">Name</label>
                   <input
-                  type="text"
-                  placeholder="carrot cake"
-                  name='name'
-                  id="name"
-                  defaultValue={recipeName}
-                  required
-                  onChange={e => setRecipeName(e.target.value)}
+                   type="text"
+                   placeholder="carrot cake"
+                   name='name'
+                   id="name"
+                   defaultValue={recipeName}
+                   required
+                   onChange={e => setRecipeName(e.target.value)}
                   />
                 </div>
 
                 <div className="row100">
                   <label htmlFor="image">Image</label>
                   <input
-                  type="url"
-                  placeholder="https://example.com/image"
-                  name="image"
-                  id="image"
-                  required
-                  defaultValue={imageLink}
-                  onChange={e => setImageLink(e.target.value)}
+                   type="url"
+                   placeholder="https://example.com/image"
+                   name="image"
+                   id="image"
+                   required
+                   defaultValue={imageLink}
+                   onChange={e => setImageLink(e.target.value)}
                   />
                 </div>
 
                 <div className="row100">
                   <label htmlFor="description">Description</label>
                   <textarea
-                  type="text"
-                  placeholder="A wonderful carrot cake recipe"
-                  name="description"
-                  id="description"
-                  required
-                  defaultValue={description}
-                  onChange={e => setDescription(e.target.value)}
+                   type="text"
+                   placeholder="A wonderful carrot cake recipe"
+                   name="description"
+                   id="description"
+                   required
+                   defaultValue={description}
+                   onChange={e => setDescription(e.target.value)}
                   />
                 </div>
 
@@ -227,19 +227,19 @@ export const CreateRecipePage = (props) => {
                     <label htmlFor="prep-time">prep</label>
                     <div className="input50"> 
                       <input
-                      type="number"
-                      name='prep-time'
-                      id='prep-time'
-                      min="0"
-                      max="60"
-                      required
-                      defaultValue={prepTime}
-                      onChange={e => setPrepTime(e.target.value)}
+                       type="number"
+                       name='prep-time'
+                       id='prep-time'
+                       min="0"
+                       max="60"
+                       required
+                       defaultValue={prepTime}
+                       onChange={e => setPrepTime(e.target.value)}
                       />
                       <select
-                      name="prep-time-unit" 
-                      onChange={e => setPrepTimeUnit(e.target.value)}
-                      defaultValue={prepTimeUnit}
+                       name="prep-time-unit" 
+                       onChange={e => setPrepTimeUnit(e.target.value)}
+                       defaultValue={prepTimeUnit}
                       >
                         <option value="min">min</option>
                         <option value="h">h</option>
@@ -251,19 +251,19 @@ export const CreateRecipePage = (props) => {
                     <label htmlFor="cook-time">cook</label>
                     <div className="input50">
                       <input
-                      type="number"
-                      name='cook-time'
-                      id="cook-time"
-                      min="0"
-                      max="60"
-                      required
-                      defaultValue={cookTime}
-                      onChange={e => setCookTime(e.target.value)}
+                       type="number"
+                       name='cook-time'
+                       id="cook-time"
+                       min="0"
+                       max="60"
+                       required
+                       defaultValue={cookTime}
+                       onChange={e => setCookTime(e.target.value)}
                       />
                       <select
-                      name="cook-time-unit" 
-                      onChange={e => setCookTimeUnit(e.target.value)}
-                      defaultValue={cookTimeUnit}
+                       name="cook-time-unit" 
+                       onChange={e => setCookTimeUnit(e.target.value)}
+                       defaultValue={cookTimeUnit}
                       >
                         <option value="min">min</option>
                         <option value="h">h</option>
@@ -275,13 +275,13 @@ export const CreateRecipePage = (props) => {
                     <label htmlFor="yield">Yield</label>
                     <div className="input100">
                       <input
-                      type="number"
-                      name='yield'
-                      id='yield'
-                      min='0'
-                      required
-                      defaultValue={amountYield}
-                      onChange={e => setAmountYield(Number(e.target.value))}
+                       type="number"
+                       name='yield'
+                       id='yield'
+                       min='0'
+                       required
+                       defaultValue={amountYield}
+                       onChange={e => setAmountYield(Number(e.target.value))}
                       />
                     </div>
                   </div>
@@ -291,13 +291,13 @@ export const CreateRecipePage = (props) => {
                 <div className="row100">
                   <label htmlFor="cook-note">cook's note</label>
                   <textarea
-                  type="text"
-                  placeholder="notes"
-                  name='cook-note'
-                  id="cook-note"
-                  required
-                  defaultValue={cookNote}
-                  onChange={e => setCookNote(e.target.value)}
+                   type="text"
+                   placeholder="notes"
+                   name='cook-note'
+                   id="cook-note"
+                   required
+                   defaultValue={cookNote}
+                   onChange={e => setCookNote(e.target.value)}
                   />
                 </div>
 
@@ -305,8 +305,8 @@ export const CreateRecipePage = (props) => {
 
             <div className="card-preview">
               <RecipeCard 
-                image={imageLink}
                 recipeName={recipeName}
+                image={imageLink}
                 views={Array(1000)}
                 reviews={Array(1000)}
                 rating={5}
@@ -317,9 +317,9 @@ export const CreateRecipePage = (props) => {
           <div className="ingredients-create-page">
             <div className="add-box">
               <button
-              className="add-button" 
-              type="button" 
-              onClick={IngredientsController.addInputFields} 
+               className="add-button" 
+               type="button" 
+               onClick={IngredientsController.addInputFields} 
               >
                 <img src={addIcon} alt="add ingredient" />
                 <span>Add ingredient</span>
@@ -332,16 +332,16 @@ export const CreateRecipePage = (props) => {
                   return(
                     <li key={i}>
                       <input
-                      type="text"
-                      name={`ingredient-${i}`}
-                      required
-                      defaultValue={ingredient.description}
-                      onChange={ e => IngredientsController.handleChangeInputFields(e, i) } 
+                       type="text"
+                       name={`ingredient-${i}`}
+                       required
+                       defaultValue={ingredient.description}
+                       onChange={ e => IngredientsController.handleChangeInputFields(e, i) } 
                       />
                       <button
-                      className='remove-button' 
-                      type="button" 
-                      onClick={() => IngredientsController.removeInputFields(i)}
+                       className='remove-button' 
+                       type="button" 
+                       onClick={() => IngredientsController.removeInputFields(i)}
                       >
                         <img src={removeIcon} alt="delete ingredient" />
                       </button>
@@ -355,9 +355,9 @@ export const CreateRecipePage = (props) => {
           <div className="directions-create-page">
             <div className="add-box">
               <button
-              className="add-button" 
-              type="button" 
-              onClick={DirectionsController.addTextareaFields} 
+               className="add-button" 
+               type="button" 
+               onClick={DirectionsController.addTextareaFields} 
               >
                 <img src={addIcon} alt="add direction" />
                 <span>Add direction</span>
@@ -370,16 +370,16 @@ export const CreateRecipePage = (props) => {
                   return(
                     <li key={i}>
                       <textarea
-                      type="text" 
-                      name={`direction-${i}`} 
-                      required
-                      defaultValue={direction.description}
-                      onChange={ e => DirectionsController.handleChangeTextareaFields(e, i) } 
+                       type="text" 
+                       name={`direction-${i}`} 
+                       required
+                       defaultValue={direction.description}
+                       onChange={ e => DirectionsController.handleChangeTextareaFields(e, i) } 
                       />
                       <button
-                      className='remove-button' 
-                      type="button" 
-                      onClick={() => DirectionsController.removeTextareaFields(i)}
+                       className='remove-button' 
+                       type="button" 
+                       onClick={() => DirectionsController.removeTextareaFields(i)}
                       >
                         <img src={removeIcon} alt="delete direction"/>
                       </button>
@@ -394,9 +394,9 @@ export const CreateRecipePage = (props) => {
             modify ? (
               <div className="modify-box-button">
                 <button
-                className="modify-button"
-                type='button'
-                onClick={RecipeController.modifyRecipe}
+                 className="modify-button"
+                 type='button'
+                 onClick={RecipeController.modifyRecipe}
                 >
                     Modify
                 </button>

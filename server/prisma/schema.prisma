@@ -10,9 +10,10 @@ datasource db {
 model User {
   id          String @id @default(uuid())
   name        String
-  github_id   Int
+  email       String
   avatar_url  String
-  login       String
+  github_id   Int?
+  google_id   String?
   recipes     Recipe[]
 
   @@map("users")
@@ -22,12 +23,12 @@ model Recipe {
   id          String @id @default(uuid())
   title       String
   description String
-  information Information?
   rating      Float @default(0)
   image       String
+  created_at  DateTime @default(now())
+  information Information?
   views       View[]
   reviews     Review[]
-  created_at  DateTime @default(now())
 
   user        User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     String
@@ -58,12 +59,12 @@ model Review {
 
 model Information {
   id            String @id @default(uuid())
-  ingredients   Ingredient[]
-  directions    Direction[]
   prep_time     String
   cook_time     String
   amount_yield  Int
   cook_note     String
+  ingredients   Ingredient[]
+  directions    Direction[]
 
   recipe        Recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
   recipe_id     String
