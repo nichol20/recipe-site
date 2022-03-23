@@ -12,3 +12,5 @@ This project was developed with the following technologies:
 - SQLite
 - React
 - Prisma
+- Google Sign-In
+- GitHub OAuth
